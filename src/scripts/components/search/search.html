@@ -1,0 +1,21 @@
+<div class="search row_direction">
+    <div><input ng-model="$ctrl.search" placeholder="busca..."/></div>
+    <div ng-class="{'search_empty': $ctrl.isEmpty}">
+        <button ng-click="$ctrl.searchQuery()">search</button>
+    </div>
+</div>
+<div class="search_media_type row_direction">
+    <div ng-repeat='mediaType in $ctrl.mediaType'>
+        <div class="row_direction" ng-click="$ctrl.mediaTypeQuery($index)">
+            <div ng-class="{'search_checked': mediaType.checked, 'search_unchecked': !mediaType.checked}"></div>
+            <div>{{mediaType.type}}</div>
+        </div>
+    </div>
+</div>
+<div class="search_asset_list">
+    <div ng-repeat='img in $ctrl.assetData'>
+        <a ui-sref="testFront.asset({id: img.assetId, assetData: img})">
+            <img ng-src="{{img.assetHref.assetThumb}}">
+        </a>
+    </div>
+</div>
