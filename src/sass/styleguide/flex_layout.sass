@@ -1,0 +1,67 @@
+$display_flex_prop: -webkit-box, -webkit-flex, -ms-flexbox, flex
+$justify_content_between_prop: justify, space-between
+
+@mixin display_flex($webkit-box, $webkit-flex, $ms-flexbox, $flex)
+  display: $webkit-box !important
+  display: $webkit-flex !important
+  display: $ms-flexbox !important
+  display: $flex !important
+
+@mixin flex_direction ($direction)
+  flex-direction: $direction
+  -webkit-flex-direction: $direction
+  @include display_flex ($display_flex_prop...)
+
+@mixin justify_content_between ($justify, $space-between)
+  -webkit-box-pack: $justify !important
+  -webkit-justify-content: $space-between !important
+  -ms-flex-pack: $justify !important
+  justify-content: $space-between !important
+  @include display_flex ($display_flex_prop...)
+
+@mixin justify_content ($justify)
+  -webkit-box-pack: $justify !important
+  -webkit-justify-content: $justify !important
+  -ms-flex-pack: $justify !important
+  justify-content: $justify !important
+  @include display_flex ($display_flex_prop...)
+
+@mixin align_items ($align)
+  -webkit-align-items: $align !important
+  -ms-flex-align: $align !important
+  align-items: $align !important
+  @include display_flex ($display_flex_prop...)
+
+@mixin flex_basis ($basis)
+  -webkit-flex: $basis
+  -ms-flex: $basis
+  flex: $basis
+
+@mixin flex_wrap ()
+  -ms-flex-wrap: wrap
+  -webkit-flex-wrap: wrap
+  flex-wrap: wrap
+
+.flex
+  @include display_flex ($display_flex_prop...)
+
+.one
+  @include flex_basis (1 0 auto)
+
+.none
+  @include flex_basis (0 0 auto)
+
+.row_direction
+  @include flex_direction (row)
+
+.column_direction
+  @include flex_direction (column)
+
+.row_wrap
+  @include flex_wrap
+
+.align_items_center
+  @include align_items (center)
+
+.justify_content_center
+  @include justify_content (center)

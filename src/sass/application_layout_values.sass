@@ -1,0 +1,30 @@
+$medium_screen_width: 992px
+$medium_container_width: 50rem
+$small_screen_width: 768px
+$small_container_width: 37rem
+$mobile_screen_width: 480px
+$mobile_container_width: 29rem
+$mobilexs_screen_width: 320px
+$mobilexs_container_width: 23rem
+$container_large_layout: 70rem
+$container_medium_layout: $medium_screen_width, $medium_container_width
+$container_small_layout: $small_screen_width, $small_container_width
+$container_mobile_layout: $mobile_screen_width, $mobile_container_width
+$container_mobilexs_layout: $mobilexs_screen_width, $mobilexs_container_width
+
+@mixin responsive_layout ($minWidth, $elementMinWidth)
+  @media screen and (min-width: $minWidth)
+    min-width: $elementMinWidth
+    width: $elementMinWidth
+
+@mixin shadow ($shadow)
+  -webkit-box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  box-shadow:  $shadow
+
+@mixin background_image ($file, $value)
+  background: url($file) no-repeat center center fixed !important
+  -webkit-background-size: $value !important
+  -moz-background-size: $value !important
+  -o-background-size: $value !important
+  background-size: $value !important

@@ -1,0 +1,19 @@
+@import 'application_layout_values'
+@import 'application_layout'
+//@import 'card'
+
+html
+  height: 100%
+
+body
+  font-family: $font_condensed
+  font-size: 14px
+  line-height: 1.5
+  color: $secondary_dark
+  text-align: left
+  background-color: $secondary_light_soft
+  margin: 0px
+  width: 100%
+  height: 100vh
+  @include flex_direction (column)
+  //@include background_image ("homepage_bg.png", cover)

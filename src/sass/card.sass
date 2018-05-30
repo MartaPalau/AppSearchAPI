@@ -1,0 +1,100 @@
+.card
+  margin-top: $margin_medium
+  @include shadow (0 0 0 0 rgba(0, 0, 0, 0))
+  background-color: transparent
+  @at-root .container_header_elements_center, &
+    min-width: $container_large_layout
+    @include responsive_layout ($container_mobilexs_layout...)
+    @include responsive_layout ($container_mobile_layout...)
+    @include responsive_layout ($container_small_layout...)
+    @include responsive_layout ($container_medium_layout...)
+  &_button_options
+    &_date
+      min-width: 5.5rem
+    &_continue
+      margin-top: $margin_small
+      text-align: right
+      .btn
+        width: 13rem
+    &.btn-raised
+      font-family: $font_regular
+      background-color: $total_white
+    span
+      text-overflow: ellipsis
+      overflow: hidden
+      max-width: 30.64rem
+  &_icon_title
+    @include flex_direction (row)
+    & > div:first-child
+      @include flex_basis (0 0 auto)
+      margin-right: $margin_small
+    .icon_info
+      font-size: $font_medium
+      color: $primary
+  &_header
+    border-bottom: 1px solid $secondary_light_soft
+    padding: $pad_small
+    @include shadow (0 0 9px 0 rgba(0, 0, 0, .2))
+    &_steps
+      .row
+        @include justify_content (center)
+        @include flex_direction (row)
+        a, span
+          margin-top: 0.2rem
+          @include flex_direction (row)
+          @include justify_content (center)
+          @include align_items (center)
+          //@include flex_wrap
+        a
+          &.--previous_step
+            span
+              @media screen and (max-width: $small_screen_width)
+                display: none !important
+        span
+          &.--next_step
+            opacity: 0.5
+            span
+              @media screen and (max-width: $small_screen_width)
+                display: none !important
+      &_title
+        color: darken($primary,10) !important
+        text-transform: uppercase
+        font-family: $font_bold_condensed
+        white-space: nowrap
+  &_body
+    padding: $pad_medium
+    margin-bottom: $margin_small
+    background-color: $total_white
+    @include shadow (0 0 5px 0 rgba(88, 88, 88, 0.3))
+    .confirm_appointment_icon.icon_check:before
+      background-color: $secondary
+      border-radius: 10rem
+      width: 6rem
+      height: 6rem
+      font-size: 4rem
+      color: $total_white
+      padding: $pad-medium
+    &_options
+      &_element
+        margin-right: $margin_medium
+        margin-bottom: $margin_small
+        width: 10rem
+        button
+          min-width: 10rem
+      &--label_title
+        text-transform: uppercase
+        color: $primary
+        font-size: $font_small
+        font-family: $font_bold_condensed
+        font-style: italic
+      &--input_icon
+        @include flex_direction (row)
+        .icon_calendar
+          color: darken($secondary_light,30)
+        input
+          color: $secondary_dark
+        &:first-child
+          @include flex_basis (0)
+        &:last-child
+          @include flex_basis (1 0 auto)
+
