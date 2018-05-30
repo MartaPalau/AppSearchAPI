@@ -5,16 +5,29 @@ module.exports = function (grunt) {
         wiredep: {
             task: {
                 src: [
-                    'src/index.html'
+                    'src/asset.html'
                 ]
             }
-        }
+        },
+        sass: {
+            dist: {
+                files: {
+                    'src/css/main.css': 'src/sass/main.sass'
+                }
+            }
+        },
     });
 
-    // Load the plugin that provides the "uglify" task.
+    grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+
+    grunt.registerTask('compilesass', function () {
+        grunt.task.run('sass');
+        grunt.file.copy('src/sass/main.sass', 'src/css/main.css');
+    });
+
     grunt.loadNpmTasks('grunt-wiredep');
 
-    // Default task(s).
     grunt.registerTask('default', ['wiredep']);
 
 };
