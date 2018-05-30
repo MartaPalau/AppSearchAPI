@@ -1,0 +1,29 @@
+{
+  "name": "test-front",
+  "description": "app",
+  "main": "index.js",
+  "authors": [
+    "Marta Palau"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/MartaPalau/app",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.7.0",
+    "Font-Awesome": "^5.0.13",
+    "angular-animate": "^1.7.0",
+    "angular-ui-router": "^1.0.18",
+    "angular-translate": "^2.18.1"
+  },
+  "overrides": {
+    "Font-Awesome": {
+      "main": "web-fonts-with-css/css/fontawesome-all.css"
+    }
+  }
+}
