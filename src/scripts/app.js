@@ -1,3 +1,7 @@
-/**
- * Created by mpalau on 30/05/2018.
- */
+(function (angular) {
+    'use strict';
+
+    var modules = ['ui.router','pascalprecht.translate'];
+
+    angular.module('testFront', modules);
+}) (angular);
