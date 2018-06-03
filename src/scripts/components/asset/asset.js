@@ -1,10 +1,16 @@
 (function(app){
 
-    assetCtrl.$inject = ['$state','$localStorage'];
-    function assetCtrl($state,$localStorage){
+    assetCtrl.$inject = ['$state','$localStorage','$timeout'];
+    function assetCtrl($state,$localStorage,$timeout){
         var vm = this;
         vm.$onInit = function () {
             vm.assetDetail = $state.params.assetData;
+            vm.animation = false;
+            vm.showLoading = true;
+            $timeout(function () {
+                vm.animation = true;
+                vm.showLoading = false;
+            }, 100);
 
             if($state.params.assetData){
                 vm.assetDetail = $state.params.assetData;
