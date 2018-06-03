@@ -5,7 +5,7 @@ module.exports = function (grunt) {
         wiredep: {
             task: {
                 src: [
-                    'src/asset.html'
+                    'src/index.html'
                 ]
             }
         },

@@ -1,8 +1,8 @@
 (function (app) {
     'use strict';
 
-    searchCtrl.$inject = ['$http','$localStorage'];
-    function searchCtrl($http,$localStorage){
+    searchCtrl.$inject = ['$http','$localStorage','$scope','angularGridInstance'];
+    function searchCtrl($http,$localStorage,$scope,angularGridInstance){
         var vm = this;
 
         vm.$onInit = function(){
@@ -22,6 +22,9 @@
                     label: 'Videos'
                 }
             ];
+            $scope.refresh = function(){
+                angularGridInstance.gallery.refresh();
+            }
         };
 
         vm.mediaTypeQuery = function(index){
@@ -37,6 +40,7 @@
         };
 
         vm.searchQuery = function() {
+            angularGridInstance.gallery.refresh();
             vm.assetData = [];
             $localStorage.$reset();
             if(vm.search != undefined){
@@ -118,7 +122,6 @@
             });
         };
     }
-
 
     app.controller('searchCtrl', searchCtrl);
 

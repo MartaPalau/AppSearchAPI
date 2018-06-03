@@ -1,21 +1,19 @@
 <div class="container_content">
-    <div class="content">
-        <div class="asset row_direction row_wrap">
-            <div class="asset_src">
-                <div ng-if="$ctrl.assetDetail.media == 'image'">
-                    <img ng-src="{{$ctrl.assetDetail.assetHref.assetLarge}}" on-error="images/no-image.png">
-                </div>
-                <div ng-if="$ctrl.assetDetail.media != 'image'">
-                    <video width="500" controls>
-                        <source ng-src="{{$ctrl.assetDetail.assetHref.assetVideo}}" type="video/mp4">
-                        Your browser does not support HTML5 video.
-                    </video>
-                </div>
+    <div class="asset row_direction row_wrap">
+        <div class="asset_src">
+            <div ng-if="$ctrl.assetDetail.media == 'image'">
+                <img ng-src="{{$ctrl.assetDetail.assetHref.assetLarge}}" on-error="images/no-image.png">
             </div>
-            <div class="asset_data">
-                <div class="asset_data_title">{{$ctrl.assetDetail.title}}</div>
-                <div class="asset_data_description">{{$ctrl.assetDetail.description}}</div>
+            <div ng-if="$ctrl.assetDetail.media != 'image'">
+                <video width="500" controls>
+                    <source ng-src="{{$ctrl.assetDetail.assetHref.assetVideo}}" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
             </div>
+        </div>
+        <div class="asset_data">
+            <div class="asset_data_title">{{$ctrl.assetDetail.title}}</div>
+            <div class="asset_data_description">{{$ctrl.assetDetail.description}}</div>
         </div>
     </div>
 </div>

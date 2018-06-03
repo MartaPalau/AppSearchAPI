@@ -1,12 +1,12 @@
-<div class="asset_list row_direction row_wrap">
+<div class="asset_list" angular-grid="$ctrl.sCtrl.assetData" ag-grid-width="300" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true">
     <div class="asset_list_item" ng-repeat='img in $ctrl.sCtrl.assetData'>
         <a ui-sref="testFront.asset({id: img.assetId, assetData: img})">
             <div ng-if="img.media == 'image'">
-                <img ng-src="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
+                <img class="asset_list_item_img" ng-src="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
             </div>
             <div ng-if="img.media == 'video'">
                 <div class="asset_list_item--video"><i class="fas fa-video fa-lg"></i></div>
-                <img ng-src="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
+                <img class="asset_list_item_img" ng-src ="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
             </div>
         </a>
     </div>

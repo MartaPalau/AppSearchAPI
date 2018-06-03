@@ -20,11 +20,18 @@
     "angular-animate": "^1.7.0",
     "angular-ui-router": "^1.0.18",
     "angular-translate": "^2.18.1",
-    "ngstorage": "ng-storage#^0.4.2"
+    "ngstorage": "ng-storage#^0.4.2",
+    "angulargrid": "^0.6.5"
   },
   "overrides": {
     "Font-Awesome": {
       "main": "web-fonts-with-css/css/fontawesome-all.css"
+    },
+    "outlayer": {
+      "main": [
+        "item.js",
+        "outlayer.js"
+      ]
     }
   }
 }
