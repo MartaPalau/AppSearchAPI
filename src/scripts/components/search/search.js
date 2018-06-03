@@ -1,8 +1,8 @@
 (function(app) {
     'use strict';
-    var component = {
+    var searchComponent = {
         templateUrl: "scripts/components/search/search.html",
         controller: 'searchCtrl'
     };
-    app.component("search", component);
+    app.component("search", searchComponent);
 })(angular.module("testFront"));

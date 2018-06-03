@@ -19,7 +19,8 @@
     "Font-Awesome": "^5.0.13",
     "angular-animate": "^1.7.0",
     "angular-ui-router": "^1.0.18",
-    "angular-translate": "^2.18.1"
+    "angular-translate": "^2.18.1",
+    "ngstorage": "ng-storage#^0.4.2"
   },
   "overrides": {
     "Font-Awesome": {

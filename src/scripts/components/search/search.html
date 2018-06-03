@@ -1,21 +1,31 @@
-<div class="search row_direction">
-    <div><input ng-model="$ctrl.search" placeholder="busca..."/></div>
-    <div ng-class="{'search_empty': $ctrl.isEmpty}">
-        <button ng-click="$ctrl.searchQuery()">search</button>
-    </div>
-</div>
-<div class="search_media_type row_direction">
-    <div ng-repeat='mediaType in $ctrl.mediaType'>
-        <div class="row_direction" ng-click="$ctrl.mediaTypeQuery($index)">
-            <div ng-class="{'search_checked': mediaType.checked, 'search_unchecked': !mediaType.checked}"></div>
-            <div>{{mediaType.type}}</div>
+<div class="container_header">
+    <div class="container_header_elements">
+        <div class="column_direction">
+            <div class="search row_direction">
+                <div class="search_input"><input  ng-keypress="$event.which === 13 && $ctrl.searchQuery()" ng-focus="$ctrl.searchIsEmpty()" ng-model="$ctrl.search" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"/></div>
+                <div class="search_button" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" ng-click="$ctrl.searchQuery()">
+                    <i class="fas fa-search fa-lg"></i>
+                </div>
+            </div>
+            <div class="search_media_type row_direction justify_content_flex_end">
+                <div ng-repeat='mediaType in $ctrl.mediaType'>
+                    <div ng-click="$ctrl.mediaTypeQuery($index)">
+                        <div class="search_media_type_item margin_small_right" ng-if="mediaType.type == 'image' " ng-class="{'checked': mediaType.checked, 'unchecked': !mediaType.checked}" >
+                            <i class="fas fa-camera-retro fa-lg"></i>
+                        </div>
+                        <div class="search_media_type_item" ng-if="mediaType.type == 'video' " ng-class="{'checked': mediaType.checked, 'unchecked': !mediaType.checked}" >
+                            <i class="fas fa-video fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<div class="search_asset_list">
-    <div ng-repeat='img in $ctrl.assetData'>
-        <a ui-sref="testFront.asset({id: img.assetId, assetData: img})">
-            <img ng-src="{{img.assetHref.assetThumb}}">
-        </a>
+<div class="container_content">
+    <div class="content">
+        <div class="asset_list_loading" ng-class="{'show': $ctrl.showLoading}"><i class="fas fa-spinner fa-pulse fa-2x"></i></div>
+        <div class="asset_list_results" ng-class="{'no_results': $ctrl.results}">{{ 'NO_RESULTS' | translate }}</div>
+        <asset-list></asset-list>
     </div>
 </div>

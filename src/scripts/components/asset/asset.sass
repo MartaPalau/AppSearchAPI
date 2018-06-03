@@ -1,0 +1,37 @@
+.asset
+    padding: $pad_large 0
+    margin-top: $margin_large
+    margin-bottom: $margin_small
+    background-color: rgba(0,0,0,0.3)
+    @include justify_content (center)
+    &_src
+        margin-bottom: $margin_medium
+        img
+            max-width: 31rem
+            background-color: $total_white
+            padding: 0.4rem
+            @media screen and (max-width: $small_screen_width)
+                max-width: 24rem
+            @media screen and (max-width: $mobile_screen_width)
+                max-width: 19rem !important
+        video
+            @media screen and (max-width: $small_screen_width)
+                max-width: 400px
+            @media screen and (max-width: $mobile_screen_width)
+                max-width: 320px
+    &_data
+        margin-left: $margin_medium
+        max-width: 20rem
+        @media screen and (max-width: $medium_screen_width)
+            max-width: 33rem
+            margin-left: 0
+            padding: 0 $pad_medium
+        &_title
+            font-family: $font_bold_condensed
+            font-size: $font_large
+            color: rgba(0,0,0,0.6)
+            line-height: 1
+            margin-bottom: $margin_small
+        &_description
+            font-size: $font_small
+            color: rgba(0,0,0,0.8)

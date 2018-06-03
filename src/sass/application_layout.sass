@@ -1,12 +1,40 @@
 @import "styleguide/styleguide"
 @import "../scripts/components/components"
+.header
+  background-color: rgba(0,0,0,0.2)
+  padding: $pad_small
+  position: fixed
+  width: 100%
+  z-index: 1
+  height: 1.5rem
+  &_content
+    @include flex_direction (row)
+    @include align_items (center)
+    @include justify_content (space-between)
+    &_left
+      opacity: 0.5
+      img
+        height: 25px
+    &_right
+      font-size: $font_small
+      font-family: $font_bold_condensed
+      cursor: pointer
+      &:hover
+        opacity: 0.7
+
+.container_header
+  &_elements
+    @include justify_content (center)
+    @include flex_basis(1 0 auto)
+    position: relative
+    padding: 4.5rem 0 $pad-small $pad-small
+    font-size: 1.5em
+    font-family: $font_condensed
+
 .container_content
   @include justify_content (center)
   @include flex_basis(1 0 auto)
-  padding-bottom: $pad_large
-  background-color: $secondary_light_soft
-  &.home_menu
-    background-color: transparent
+  background-color: transparent
 
 .footer
   width: 100%

@@ -1,44 +1,27 @@
 (function (app) {
     'use strict';
 
-    app.controller('searchCtrl', function($http){
+    searchCtrl.$inject = ['$http','$localStorage'];
+    function searchCtrl($http,$localStorage){
         var vm = this;
-        vm.assetData = [];
-        vm.assetCollection = [];
-        vm.assetCollectionImages = [];
-        vm.mediaType = [
-            {
-                type: 'image',
-                checked: true,
-                label: 'Images'
-            },
-            {
-                type: 'video',
-                checked: true,
-                label: 'Videos'
-            }
-        ];
-        vm.getItemCollection = function(collection){
-            $http.get(collection).then(function (res) {
-                var assetCol = res.data;
-                vm.assetCollection.push(assetCol);
-                angular.forEach(vm.assetCollection, function (asset) {
-                    vm.assetOrig = asset[0];
-                    vm.assetLarge= asset[1];
-                    vm.assetMedium = asset[2];
-                    vm.assetSmall = asset[3];
-                    vm.assetThumb= asset[4];
-                });
-                vm.assetCollectionImages.push({
-                    assetSmall: vm.assetSmall,
-                    assetThumb: vm.assetThumb
-                });
-                angular.forEach(vm.assetData, function (asset, key) {
-                    vm.assetData[key].assetHref = vm.assetCollectionImages[key];
-                });
-            }, function (res) {
-                console.log(res);
-            });
+
+        vm.$onInit = function(){
+            vm.assetData = [];
+            vm.isEmpty = false;
+            vm.results = false;
+            vm.showLoading = false;
+            vm.mediaType = [
+                {
+                    type: 'image',
+                    checked: true,
+                    label: 'Images'
+                },
+                {
+                    type: 'video',
+                    checked: true,
+                    label: 'Videos'
+                }
+            ];
         };
 
         vm.mediaTypeQuery = function(index){
@@ -55,42 +38,52 @@
 
         vm.searchQuery = function() {
             vm.assetData = [];
+            $localStorage.$reset();
             if(vm.search != undefined){
-                vm.searchIsEmpty();
+                vm.showLoading = true;
+                vm.setMediaType();
                 var getQuery ='https://images-api.nasa.gov/search?q='+vm.search+'&media_type='+vm.mediaSelected;
                 $http.get(getQuery)
                     .then(function (res) {
-                        var collItem = res.data.collection.items;
-                        angular.forEach(collItem, function (item) {
+                        vm.showLoading = false;
+                        vm.collItem = res.data.collection.items;
+                        vm.noResults(vm.collItem);
+                        angular.forEach(vm.collItem, function (item) {
                             var data = item.data;
-                            vm.getItemData(data);
-                            var urlCollection = item.href;
-                            vm.getItemCollection(urlCollection);
+                            //var urlCollection = item.href;
+                            vm.getAssetData(data);
                             vm.assetData.push({
                                 assetId: vm.id,
-                                assetHref: null,
+                                assetHref: vm.assetHref,
                                 description: vm.description,
                                 title: vm.title,
-                                media: vm.media
+                                media: vm.media,
                             });
                         });
-                });
+                    });
             }else{
                 vm.isEmpty = true;
             }
 
         };
 
-        //vm.getImages = function(){
-        //    angular.forEach(vm.assetData, function (item) {
-        //        var asset = item.assetHref;
-        //        angular.forEach(asset, function (item) {
-        //            item.assetOrig = asset[0];
-        //        });
-        //    });
-        //};
+        vm.noResults = function(assetItems){
+            if(assetItems.length > 0){
+                vm.results = false;
+            } else {
+                vm.results = true;
+            }
+        };
 
         vm.searchIsEmpty = function(){
+            if(vm.search != undefined){
+                vm.isEmpty = true;
+            }else{
+                vm.isEmpty = false;
+            }
+        };
+
+        vm.setMediaType = function(){
             vm.isEmpty = false;
             vm.mediaSelected = [];
             angular.forEach(vm.mediaType, function (type) {
@@ -100,14 +93,33 @@
                 }
             });
         };
-        vm.getItemData = function(data){
+
+        vm.getAssetData = function(data){
             angular.forEach(data, function (itemData) {
                 vm.id = itemData.nasa_id;
                 vm.description =  itemData.description;
                 vm.title =  itemData.title;
                 vm.media = itemData.media_type;
+                if(vm.media == 'image'){
+                    vm.assetThumb = 'http://images-assets.nasa.gov/image/' + vm.id + '/' + vm.id + '~thumb.jpg';
+                    vm.assetLarge = 'http://images-assets.nasa.gov/image/' + vm.id + '/' + vm.id + '~small.jpg';
+                    vm.assetHref = {
+                        assetThumb: vm.assetThumb,
+                        assetLarge: vm.assetLarge
+                    };
+                } else if (vm.media == 'video'){
+                    vm.assetThumbPng = 'http://images-assets.nasa.gov/video/' + vm.id + '/' + vm.id + '~small_thumb_00002.png';
+                    vm.assetVideo = 'http://images-assets.nasa.gov/video/' + vm.id + '/' + vm.id + '~small.mp4';
+                    vm.assetHref = {
+                        assetThumb: vm.assetThumbPng,
+                        assetVideo: vm.assetVideo
+                    };
+                }
             });
         };
-    });
+    }
+
+
+    app.controller('searchCtrl', searchCtrl);
 
 }(angular.module('testFront')));

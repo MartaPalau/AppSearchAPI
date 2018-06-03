@@ -1,5 +1,5 @@
 $medium_screen_width: 992px
-$medium_container_width: 50rem
+$medium_container_width: 60rem
 $small_screen_width: 768px
 $small_container_width: 37rem
 $mobile_screen_width: 480px
@@ -17,14 +17,17 @@ $container_mobilexs_layout: $mobilexs_screen_width, $mobilexs_container_width
     min-width: $elementMinWidth
     width: $elementMinWidth
 
-@mixin shadow ($shadow)
-  -webkit-box-shadow: $shadow
-  -moz-box-shadow: $shadow
-  box-shadow:  $shadow
-
 @mixin background_image ($file, $value)
   background: url($file) no-repeat center center fixed !important
   -webkit-background-size: $value !important
   -moz-background-size: $value !important
   -o-background-size: $value !important
   background-size: $value !important
+
+@mixin transition($str)
+  -webkit-transition: $str
+  -moz-transition: $str
+  -ms-transition: $str
+  -o-transition: $str
+  transition: $str
+

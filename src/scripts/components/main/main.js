@@ -1,16 +1,11 @@
 (function(app) {
     'use strict';
-
-    controller.$inject = ['$scope', '$http'];
-    function controller($http){
-
-        var vm = this;
-
+    mainCtrl.$inject = ['$scope', '$http'];
+    function mainCtrl(){
     }
-
-    var component = {
+    var mainComponent = {
         templateUrl: "scripts/components/main/main.html",
-        controller: controller
+        controller: mainCtrl
     };
-    app.component("main", component);
+    app.component("main", mainComponent);
 })(angular.module("testFront"));

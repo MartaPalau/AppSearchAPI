@@ -1,0 +1,50 @@
+.asset_list
+  @include justify_content (space-between)
+  @media screen and (max-width: $small_screen_width)
+    @include justify_content (center)
+  &_loading
+    text-align: center
+    display: none
+    &.show
+      display: block !important
+  &_results
+    display: none
+    text-align: center
+    font-family: $font_condensed_italic
+    font-size: $font_medium
+    color: rgba(0,0,0,0.4)
+    &.no_results
+      display: block !important
+  &_item
+    position: relative
+    @include transition(all ease 0.3s)
+    margin: 0 0.1rem
+    &:hover
+      @include transition(all ease 0.3s)
+      transform: scale(1.07, 1.07)
+
+    img
+      max-width: 10rem
+      max-height: 6rem
+      background-color: rgba(0,0,0,0.3)
+      padding: 0.4rem
+      @media screen and (max-width: $small_screen_width)
+        max-width: 28rem
+        max-height: 28rem
+      @media screen and (max-width: $mobile_screen_width)
+        max-width: 21rem !important
+        max-height: 21rem !important
+      @media screen and (max-width: $mobilexs_screen_width)
+        max-width: 15rem !important
+        max-height: 15rem !important
+    &--video
+      position: absolute
+      color: rgba(155, 155, 155, 0.9)
+      left: 37%
+      top: 30%
+      background-color: rgba(155, 155, 155, 0.4)
+      padding: $pad_small 0.8rem
+      border-radius: 0.3rem
+      @media screen and (max-width: $small_screen_width)
+        left: 44%
+        top: 39%

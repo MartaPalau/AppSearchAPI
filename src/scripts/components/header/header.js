@@ -1,16 +1,17 @@
 (function(app) {
     'use strict';
 
-    controller.$inject = ['$scope', '$http'];
-    function controller($http){
-
+    headerCtrl.$inject = ['$state'];
+    function headerCtrl($state){
         var vm = this;
-
+        vm.stateParams = $state.params;
+        vm.searchBack = function(){
+            window.history.back();
+        }
     }
-
-    var component = {
+    var headerComponent = {
         templateUrl: "scripts/components/header/header.html",
-        controller: controller
+        controller: headerCtrl
     };
-    app.component("header", component);
+    app.component("header", headerComponent);
 })(angular.module("testFront"));
