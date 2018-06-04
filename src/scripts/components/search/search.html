@@ -2,8 +2,8 @@
     <div class="container_header_elements">
         <div class="column_direction">
             <div class="search row_direction">
-                <div class="search_input"><input  ng-keypress="$event.which === 13 && $ctrl.searchQuery()" ng-focus="$ctrl.searchIsEmpty()" ng-model="$ctrl.search" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"/></div>
-                <div class="search_button" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" ng-click="$ctrl.searchQuery()">
+                <div class="search_input"><input  ng-keypress="$event.which === 13 && $ctrl.getQuery($ctrl.search)" ng-model="$ctrl.search" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" placeholder="{{ 'SEARCH_PLACEHOLDER' | translate }}"/></div>
+                <div class="search_button" ng-class="{'search_empty': $ctrl.isEmpty,'search_full': !$ctrl.isEmpty}" ng-click="$ctrl.getQuery($ctrl.search)">
                     <i class="fas fa-search fa-lg"></i>
                 </div>
             </div>

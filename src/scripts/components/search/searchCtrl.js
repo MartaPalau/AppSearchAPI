@@ -22,73 +22,71 @@
                     label: 'Videos'
                 }
             ];
+
             $scope.refresh = function(){
                 angularGridInstance.gallery.refresh();
+            };
+
+            vm.getQueryStorage();
+        };
+
+        vm.getQueryStorage = function(){
+            if($localStorage.searchQuery){
+                vm.getQuery($localStorage.searchQuery);
+                vm.search = $localStorage.searchQuery;
             }
         };
 
         vm.mediaTypeQuery = function(index){
             angular.forEach(vm.mediaType, function (type, key) {
                 if(index == key) {
-                    if (type.checked) {
-                        type.checked = false;
-                    } else {
-                        type.checked = true;
-                    }
+                    (type.checked) ? type.checked = false : type.checked = true;
                 }
             });
         };
 
-        vm.searchQuery = function() {
-            angularGridInstance.gallery.refresh();
-            vm.assetData = [];
-            $localStorage.$reset();
-            if(vm.search != undefined){
-                vm.showLoading = true;
-                vm.setMediaType();
-                var getQuery ='https://images-api.nasa.gov/search?q='+vm.search+'&media_type='+vm.mediaSelected;
-                $http.get(getQuery)
-                    .then(function (res) {
-                        vm.showLoading = false;
-                        vm.collItem = res.data.collection.items;
-                        vm.noResults(vm.collItem);
-                        angular.forEach(vm.collItem, function (item) {
-                            var data = item.data;
-                            //var urlCollection = item.href;
-                            vm.getAssetData(data);
-                            vm.assetData.push({
-                                assetId: vm.id,
-                                assetHref: vm.assetHref,
-                                description: vm.description,
-                                title: vm.title,
-                                media: vm.media,
-                            });
-                        });
-                    });
-            }else{
-                vm.isEmpty = true;
-            }
+       vm.getQuery = function (search){
+            vm.setMediaType();
+           if(search) {
+               $localStorage.searchQuery = search;
+               vm.getQuerySrc = 'https://images-api.nasa.gov/search?q=' + search + '&media_type=' + vm.mediaSelected;
+               vm.searchQuery(vm.getQuerySrc);
+           }
+           vm.searchIsEmpty(search);
+        };
 
+        vm.searchQuery = function(resultQuery) {
+            vm.assetData = [];
+            vm.showLoading = true;
+            $http.get(resultQuery)
+                .then(function (res) {
+                    vm.showLoading = false;
+                    vm.collItem = res.data.collection.items;
+                    vm.noResults(vm.collItem);
+                    vm.iterateAssetItems(vm.collItem);
+                },function(res){
+                    console.log("ERROR")
+            });
+
+        };
+
+        vm.iterateAssetItems = function(collItem){
+            angular.forEach(collItem, function (item) {
+                var data = item.data;
+                vm.getAssetData(data);
+                vm.assetData.push({assetId: vm.id, assetHref: vm.assetHref, description: vm.description, title: vm.title, media: vm.media});
+            });
         };
 
         vm.noResults = function(assetItems){
-            if(assetItems.length > 0){
-                vm.results = false;
-            } else {
-                vm.results = true;
-            }
+            (assetItems.length > 0) ? vm.results = false : vm.results = true;
         };
 
-        vm.searchIsEmpty = function(){
-            if(vm.search != undefined){
-                vm.isEmpty = true;
-            }else{
-                vm.isEmpty = false;
-            }
+        vm.searchIsEmpty = function(search){
+            (search) ? vm.isEmpty = false : vm.isEmpty = true;
         };
 
         vm.setMediaType = function(){
-            vm.isEmpty = false;
             vm.mediaSelected = [];
             angular.forEach(vm.mediaType, function (type) {
                 vm.mediaTypeActive = type.checked;
@@ -104,22 +102,26 @@
                 vm.description =  itemData.description;
                 vm.title =  itemData.title;
                 vm.media = itemData.media_type;
-                if(vm.media == 'image'){
-                    vm.assetThumb = 'http://images-assets.nasa.gov/image/' + vm.id + '/' + vm.id + '~thumb.jpg';
-                    vm.assetLarge = 'http://images-assets.nasa.gov/image/' + vm.id + '/' + vm.id + '~small.jpg';
-                    vm.assetHref = {
-                        assetThumb: vm.assetThumb,
-                        assetLarge: vm.assetLarge
-                    };
-                } else if (vm.media == 'video'){
-                    vm.assetThumbPng = 'http://images-assets.nasa.gov/video/' + vm.id + '/' + vm.id + '~small_thumb_00002.png';
-                    vm.assetVideo = 'http://images-assets.nasa.gov/video/' + vm.id + '/' + vm.id + '~small.mp4';
-                    vm.assetHref = {
-                        assetThumb: vm.assetThumbPng,
-                        assetVideo: vm.assetVideo
-                    };
-                }
+                vm.getAssetSrc(vm.media, vm.id);
             });
+        };
+
+        vm.getAssetSrc = function(mediaType, id){
+            if(mediaType == 'image'){
+                vm.assetThumb = 'http://images-assets.nasa.gov/image/' + id + '/' + id + '~thumb.jpg';
+                vm.assetLarge = 'http://images-assets.nasa.gov/image/' + id + '/' + id + '~small.jpg';
+                vm.assetHref = {
+                    assetThumb: vm.assetThumb,
+                    assetLarge: vm.assetLarge
+                };
+            } else if (mediaType == 'video'){
+                vm.assetThumbPng = 'http://images-assets.nasa.gov/video/' + id + '/' + id + '~small_thumb_00002.png';
+                vm.assetVideo = 'http://images-assets.nasa.gov/video/' + id + '/' + id + '~small.mp4';
+                vm.assetHref = {
+                    assetThumb: vm.assetThumbPng,
+                    assetVideo: vm.assetVideo
+                };
+            }
         };
     }
 
