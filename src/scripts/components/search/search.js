@@ -1,7 +1,7 @@
 (function(app) {
     'use strict';
     var searchComponent = {
-        templateUrl: "scripts/components/search/search.html",
+        templateUrl: "src/scripts/components/search/search.html",
         controller: 'searchCtrl'
     };
     app.component("search", searchComponent);

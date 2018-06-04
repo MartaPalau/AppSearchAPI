@@ -3,12 +3,11 @@
         <div class="asset_loading" ng-class="{'show': $ctrl.showLoading}"><i class="fas fa-spinner fa-pulse fa-2x"></i></div>
         <div class="asset_src" ng-class="{'fade-in': $ctrl.animation}">
             <div ng-if="$ctrl.assetDetail.media == 'image'">
-                <img ng-src="{{$ctrl.assetDetail.assetHref.assetLarge}}" on-error="images/no-image.png">
+                <img ng-src="{{$ctrl.assetDetail.assetHref.assetLarge}}" on-error="src/images/no-image.png">
             </div>
             <div ng-if="$ctrl.assetDetail.media != 'image'">
                 <video width="500" controls>
                     <source ng-src="{{$ctrl.assetDetail.assetHref.assetVideo}}" type="video/mp4">
-                    Your browser does not support HTML5 video.
                 </video>
             </div>
         </div>

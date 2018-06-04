@@ -2,11 +2,11 @@
     <div class="asset_list_item" ng-repeat='img in $ctrl.sCtrl.assetData'>
         <a ui-sref="testFront.asset({id: img.assetId, assetData: img})">
             <div ng-if="img.media == 'image'">
-                <img class="asset_list_item_img" ng-src="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
+                <img class="asset_list_item_img" ng-src="{{img.assetHref.assetThumb}}" on-error="src/images/no-image.png">
             </div>
             <div ng-if="img.media == 'video'">
                 <div class="asset_list_item--video"><i class="fas fa-video fa-lg"></i></div>
-                <img class="asset_list_item_img" ng-src ="{{img.assetHref.assetThumb}}" on-error="images/no-image.png">
+                <img class="asset_list_item_img" ng-src ="{{img.assetHref.assetThumb}}" on-error="src/images/no-image.png">
             </div>
         </a>
     </div>
