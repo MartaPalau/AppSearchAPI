@@ -1,13 +1,12 @@
 (function (app) {
     'use strict';
 
-    searchCtrl.$inject = ['$http','$localStorage','$scope','angularGridInstance'];
-    function searchCtrl($http,$localStorage,$scope,angularGridInstance){
+    searchCtrl.$inject = ['$http','$scope','angularGridInstance','$localStorage'];
+    function searchCtrl($http,$scope,angularGridInstance,$localStorage){
         var vm = this;
 
         vm.$onInit = function(){
             vm.assetData = [];
-            vm.isEmpty = false;
             vm.results = false;
             vm.showLoading = false;
             vm.mediaType = [
