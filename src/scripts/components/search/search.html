@@ -27,7 +27,7 @@
     <div class="asset_list_loading" ng-class="{'show': $ctrl.showLoading}"><i class="fas fa-spinner fa-pulse fa-2x"></i></div>
     <div class="asset_list_results" ng-class="{'no_results': $ctrl.results}">{{ 'NO_RESULTS' | translate }}</div>
     <asset-list></asset-list>
-    <div ng-if="!$ctrl.results" class="asset_list_anchor">
+    <div ng-if="$ctrl.search" class="asset_list_anchor">
         <a href="#search">{{"BACK_TO_SEARCH" | translate}}</a>
     </div>
 </div>
