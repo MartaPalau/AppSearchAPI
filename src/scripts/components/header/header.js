@@ -10,7 +10,7 @@
         }
     }
     var headerComponent = {
-        templateUrl: "src/scripts/components/header/header.html",
+        templateUrl: "scripts/components/header/header.html",
         controller: headerCtrl
     };
     app.component("header", headerComponent);

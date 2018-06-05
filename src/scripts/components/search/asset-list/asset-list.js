@@ -8,7 +8,7 @@
         require: {
             sCtrl: '^search'
         },
-        templateUrl: 'src/scripts/components/search/asset-list/asset-list.html'
+        templateUrl: 'scripts/components/search/asset-list/asset-list.html'
     };
     app.component('assetList', assetListComponent);
 })(angular.module("testFront"));

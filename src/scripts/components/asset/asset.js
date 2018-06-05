@@ -23,7 +23,7 @@
     }
     var assetComponent = {
         controller: assetCtrl,
-        templateUrl: 'src/scripts/components/asset/asset.html'
+        templateUrl: 'scripts/components/asset/asset.html'
     };
     app.component('asset', assetComponent);
 })(angular.module("testFront"));

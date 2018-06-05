@@ -1,9 +1,6 @@
 # Webstorm files
 .idea/
 
-# Bower files
-src/libs
-
 # npm files
 /node_modules
 

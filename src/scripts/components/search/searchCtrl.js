@@ -1,8 +1,8 @@
 (function (app) {
     'use strict';
 
-    searchCtrl.$inject = ['$http','$scope','angularGridInstance','$localStorage'];
-    function searchCtrl($http,$scope,angularGridInstance,$localStorage){
+    searchCtrl.$inject = ['$http','$scope','angularGridInstance','$localStorage','searchService','toastr'];
+    function searchCtrl($http,$scope,angularGridInstance,$localStorage,searchService,toastr){
         var vm = this;
 
         vm.$onInit = function(){
@@ -46,27 +46,20 @@
 
        vm.getQuery = function (search){
             vm.setMediaType();
+            vm.showLoading = true;
+            vm.assetData = [];
            if(search) {
                $localStorage.searchQuery = search;
-               vm.getQuerySrc = 'https://images-api.nasa.gov/search?q=' + search + '&media_type=' + vm.mediaSelected;
-               vm.searchQuery(vm.getQuerySrc);
+               searchService.getQuery(search,vm.mediaSelected).then(function(res){
+                   vm.showLoading = false;
+                   vm.collItem = res.data.collection.items;
+                   vm.noResults(vm.collItem);
+                   vm.iterateAssetItems(vm.collItem);
+               },function(){
+                   toastr.error('ERROR');
+               });
            }
            vm.searchIsEmpty(search);
-        };
-
-        vm.searchQuery = function(resultQuery) {
-            vm.assetData = [];
-            vm.showLoading = true;
-            $http.get(resultQuery)
-                .then(function (res) {
-                    vm.showLoading = false;
-                    vm.collItem = res.data.collection.items;
-                    vm.noResults(vm.collItem);
-                    vm.iterateAssetItems(vm.collItem);
-                },function(res){
-                    console.log("ERROR")
-            });
-
         };
 
         vm.iterateAssetItems = function(collItem){
@@ -83,6 +76,7 @@
 
         vm.searchIsEmpty = function(search){
             (search) ? vm.isEmpty = false : vm.isEmpty = true;
+            vm.showLoading = false;
         };
 
         vm.setMediaType = function(){
