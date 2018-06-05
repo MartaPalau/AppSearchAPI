@@ -244,7 +244,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     padding: 0.5rem 3.5rem 0.5rem 0.5rem;
     font-family: roboto_condensed_italic, sans-serif;
     font-size: 1em;
-    color: #9a9a9a; }
+    color: #9a9a9a;
+    background-color: rgba(255, 255, 255, 0.9); }
     @media screen and (max-width: 480px) {
       .search_input input {
         min-width: 17rem; } }
@@ -297,6 +298,26 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   display: none; }
   .asset_list_loading.show {
     display: block !important; }
+.asset_list_anchor {
+  text-align: center;
+  margin: 2rem 0; }
+  .asset_list_anchor a {
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out;
+    text-decoration: none;
+    font-family: roboto_bold_condensed, sans-serif;
+    color: #a3a3c2;
+    font-size: 1.5em;
+    -webkit-transition: all 0.4s ease-out;
+    -moz-transition: all 0.4s ease-out;
+    -ms-transition: all 0.4s ease-out;
+    -o-transition: all 0.4s ease-out;
+    transition: all 0.4s ease-out; }
+    .asset_list_anchor a:hover {
+      opacity: 0.7; }
 .asset_list_results {
   display: none;
   text-align: center;
@@ -334,7 +355,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     border-radius: 0.3rem; }
     .asset_list_item_img.img-loaded {
       visibility: visible;
-      opacity: 1; }
+      opacity: 0.9; }
   .asset_list_item--video {
     position: absolute;
     color: rgba(255, 255, 255, 0.9);
@@ -446,7 +467,8 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     display: -ms-flexbox !important;
     display: flex !important; }
     .header_content_left {
-      opacity: 0.5; }
+      opacity: 0.5;
+      cursor: pointer; }
       .header_content_left img {
         height: 25px; }
     .header_content_right {

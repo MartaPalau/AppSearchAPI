@@ -1,4 +1,4 @@
-<div class="asset_list" angular-grid="$ctrl.sCtrl.assetData" ag-grid-width="300" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true">
+<div class="asset_list" angular-grid="$ctrl.sCtrl.assetData" ag-grid-width="250" ag-gutter-size="10" ag-id="gallery" ag-refresh-on-img-load="true">
     <div class="asset_list_item" ng-repeat='img in $ctrl.sCtrl.assetData'>
         <a ui-sref="testFront.asset({id: img.assetId, assetData: img})">
             <div ng-if="img.media == 'image'">

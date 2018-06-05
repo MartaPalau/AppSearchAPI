@@ -22,7 +22,10 @@
     "angular-translate": "^2.18.1",
     "ngstorage": "ng-storage#^0.4.2",
     "angulargrid": "^0.6.5",
-    "angular-toastr": "^2.1.1"
+    "angular-toastr": "^2.1.1",
+    "karma": "^0.4.6",
+    "karma-jasmine": "^1.1.2",
+    "angular-mocks": "^1.7.0"
   },
   "overrides": {
     "Font-Awesome": {
